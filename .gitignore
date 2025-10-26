@@ -19,3 +19,4 @@ index/
 # Project docs not for commit
 project-details.md
 scripts/publish-docker.ps1
+commands.txt
