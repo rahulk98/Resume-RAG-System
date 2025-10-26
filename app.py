@@ -8,9 +8,29 @@ from llama_index.llms.google_genai import GoogleGenAI
 from llama_index.core import StorageContext, load_index_from_storage
 from contextlib import asynccontextmanager
 import uvicorn
-
+from fastapi.middleware.cors import CORSMiddleware
 
 load_dotenv()
+
+@asynccontextmanager
+async def lifespan(app: FastAPI):
+    init_models_and_index()
+    yield
+
+app = FastAPI(title="RAG Resume API", lifespan=lifespan)
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=[
+        "https://rahul-krishnan.is-a.dev",
+        "https://rahulk98.github.io",
+        "http://localhost:8001",
+    ],
+    allow_methods=["GET", "POST", "OPTIONS"],
+    allow_headers=["*"],
+    allow_credentials=False,
+    max_age=86400,
+)
 
 GOOGLE_API_KEY = os.getenv("GOOGLE_API_KEY")
 if not GOOGLE_API_KEY:
@@ -23,12 +43,7 @@ LLM_MODEL_NAME = "gemini-2.5-flash"
 
 
 
-@asynccontextmanager
-async def lifespan(app: FastAPI):
-    init_models_and_index()
-    yield
 
-app = FastAPI(title="RAG Resume API", lifespan=lifespan)
 
 
 # global objects
@@ -99,7 +114,7 @@ def query(request: QueryRequest):
     if not query_text:
         raise HTTPException(status_code=400, detail="Query text is required.")
     try:
-        query_engine = index.as_query_engine(llm=llm)
+        query_engine = index.as_query_engine(llm=llm, similarity_top_k=top_k or 5)
         response = query_engine.query(query_text)
         return QueryResponse(query=query_text, answer=str(response))
     except Exception as e:

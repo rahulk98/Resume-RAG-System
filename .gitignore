@@ -15,3 +15,7 @@ test_script.py
 docs/
 index/
 .DS_Store
+
+# Project docs not for commit
+project-details.md
+scripts/publish-docker.ps1

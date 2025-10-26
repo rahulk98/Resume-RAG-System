@@ -1,0 +1,3 @@
+docker run --rm -p 8000:8000 --env-file .env resume-rag-system:latest 
+
+docker build -t resume-rag-system:latest -f DOCKERFILE .
