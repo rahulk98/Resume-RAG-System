@@ -12,8 +12,13 @@ Retrieval-Augmented Generation (RAG) API that indexes documents in `docs/` and a
 
 ### Quickstart
 ```bash
+# Install dependencies
 pip install -r requirements.txt
-python build_index.py  # builds and persists index to ./index
+
+# Add your documents to ./docs, then build and persist the index to ./index
+python build_index.py
+
+# Start the API server
 python -m uvicorn app:app --host 0.0.0.0 --port 8000
 ```
 
