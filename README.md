@@ -9,6 +9,7 @@ Retrieval-Augmented Generation (RAG) API that indexes documents in `docs/` and a
 ### Prerequisites
 - **Python**: 3.12+
 - **Environment**: `GOOGLE_API_KEY` set (in shell or `.env`)
+  - Optional Supabase logging: set `SUPABASE_URL` and `SUPABASE_SERVICE_ROLE_KEY` (or `SUPABASE_ANON_KEY`)
 
 ### Quickstart
 ```bash

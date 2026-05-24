@@ -17,7 +17,7 @@ def build_index():
 
     # Setup the gemini model for embeddings
     embed_model = GoogleGenAIEmbedding(
-        model_name="text-embedding-004", embed_batch_size=100, api_key=GOOGLE_API_KEY
+        model_name="gemini-embedding-001", embed_batch_size=100, api_key=GOOGLE_API_KEY
     )
     # Build the vector store index from the documents in docs folder
     index = VectorStoreIndex.from_documents(documents, embed_model=embed_model)

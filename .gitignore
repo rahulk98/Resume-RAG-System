@@ -14,9 +14,13 @@ todo.md
 test_script.py
 docs/
 index/
+archived-docs/
 .DS_Store
 
 # Project docs not for commit
 project-details.md
 scripts/publish-docker.ps1
 commands.txt
+docs/plans/
+*.json
+CLAUDE.md
